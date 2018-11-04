@@ -515,7 +515,7 @@ namespace seal
 
         void write_ciphertext_array(const std::vector<int> &ciphertext_vector)
         {
-            std:u_int64_t* ciphertext_array = &ciphertext_vector[0];
+            int* ciphertext_array = &ciphertext_vector[0];
 
             if (ciphertext_array == nullptr)
             {
