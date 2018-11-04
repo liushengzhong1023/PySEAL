@@ -513,7 +513,10 @@ namespace seal
             return ret;
         }
 
-        void write_ciphertext_array(std::uint64_t *ciphertext_array) {
+        void write_ciphertext_array(const std::vector<int> &ciphertext_vector)
+        {
+            std::list<std::uint64_t> ciphertext_array(ciphertext_vector.begin(), ciphertext_vector.end());
+
             if (ciphertext_array == nullptr)
             {
                 throw std::invalid_argument("ciphertext_array cannot be null");

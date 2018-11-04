@@ -170,29 +170,29 @@ PYBIND11_MODULE(seal, m) {
         "Sets the operation history to that of a freshly encrypted ciphertext");
 
   py::class_<Ciphertext>(m, "Ciphertext")
-    .def(py::init<>())
-    .def(py::init<const Ciphertext &>())
-    .def(py::init<const MemoryPoolHandle &>())
-    .def(py::init<const EncryptionParameters &, const MemoryPoolHandle &>())
-    .def(py::init<const EncryptionParameters &>())
-    .def("reserve", (void (Ciphertext::*)(int)) &Ciphertext::reserve,
-        "Allocates enough memory to accommodate the backing array of a ciphertext with given capacity")
-    .def("reserve", (void (Ciphertext::*)(int, const MemoryPoolHandle &)) &Ciphertext::reserve,
-        "Allocates enough memory to accommodate the backing array of a ciphertext with given capacity")
-    .def("reserve", (void (Ciphertext::*)(const EncryptionParameters &, int)) &Ciphertext::reserve,
-        "Allocates enough memory to accommodate the backing array of a ciphertext with given capacity")
-    .def("reserve", (void (Ciphertext::*)(const EncryptionParameters &, int, const MemoryPoolHandle &)) &Ciphertext::reserve,
-        "Allocates enough memory to accommodate the backing array of a ciphertext with given capacity")
-    .def("size", &Ciphertext::size, "Returns the capacity of the allocation")
-    .def("read_ciphertext_array", &Ciphertext::read_ciphertext_array,
-        "Returns the underlying ciphertext array")
-    .def("write_ciphertext_array", &Ciphertext::write_ciphertext_array, 
-        "Set the underlying ciphertext array")
-    .def(py::pickle(&serialize<Ciphertext>, &deserialize<Ciphertext>))
-    .def("save", (void (Ciphertext::*)(std::string &)) &Ciphertext::python_save,
-        "Saves Ciphertext object to file given filepath")
-    .def("load", (void (Ciphertext::*)(std::string &)) &Ciphertext::python_load,
-        "Loads Ciphertext object from file given filepath");
+      .def(py::init<>())
+      .def(py::init<const Ciphertext &>())
+      .def(py::init<const MemoryPoolHandle &>())
+      .def(py::init<const EncryptionParameters &, const MemoryPoolHandle &>())
+      .def(py::init<const EncryptionParameters &>())
+      .def("reserve", (void (Ciphertext::*)(int)) & Ciphertext::reserve,
+           "Allocates enough memory to accommodate the backing array of a ciphertext with given capacity")
+      .def("reserve", (void (Ciphertext::*)(int, const MemoryPoolHandle &)) & Ciphertext::reserve,
+           "Allocates enough memory to accommodate the backing array of a ciphertext with given capacity")
+      .def("reserve", (void (Ciphertext::*)(const EncryptionParameters &, int)) & Ciphertext::reserve,
+           "Allocates enough memory to accommodate the backing array of a ciphertext with given capacity")
+      .def("reserve", (void (Ciphertext::*)(const EncryptionParameters &, int, const MemoryPoolHandle &)) & Ciphertext::reserve,
+           "Allocates enough memory to accommodate the backing array of a ciphertext with given capacity")
+      .def("size", &Ciphertext::size, "Returns the capacity of the allocation")
+      .def("read_ciphertext_array", &Ciphertext::read_ciphertext_array,
+           "Returns the underlying ciphertext array")
+      .def("write_ciphertext_array", (void (Ciphertext::*)(const std::vector<int> &)) & Ciphertext::write_ciphertext_array,
+           "Set the underlying ciphertext array")
+      .def(py::pickle(&serialize<Ciphertext>, &deserialize<Ciphertext>))
+      .def("save", (void (Ciphertext::*)(std::string &)) & Ciphertext::python_save,
+           "Saves Ciphertext object to file given filepath")
+      .def("load", (void (Ciphertext::*)(std::string &)) & Ciphertext::python_load,
+           "Loads Ciphertext object from file given filepath");
 
   py::class_<Decryptor>(m, "Decryptor")
     .def(py::init<const SEALContext &, const SecretKey &>())
