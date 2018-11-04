@@ -515,9 +515,12 @@ namespace seal
 
         void write_ciphertext_array(const std::vector<int> &ciphertext_vector)
         {
-            int* ciphertext_array = &ciphertext_vector[0];
+            std::uint64_t *ciphertext_array = new std::uint64_t [ciphertext_vector.size()];
+            for (int i = 0; i < ciphertext_vector.size(); i++){
+                ciphertext_array[i] = ciphertext_vector[i];
+            }
 
-            if (ciphertext_array == nullptr)
+                if (ciphertext_array == nullptr)
             {
                 throw std::invalid_argument("ciphertext_array cannot be null");
             }
