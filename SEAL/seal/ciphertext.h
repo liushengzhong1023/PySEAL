@@ -517,7 +517,7 @@ namespace seal
         {
             std::uint64_t *ciphertext_array = new std::uint64_t [ciphertext_vector.size()];
             for (int i = 0; i < ciphertext_vector.size(); i++){
-                ciphertext_array[i] = ciphertext_vector[i];
+                ciphertext_array[i] = (uint64_t) ciphertext_vector[i];
             }
 
                 if (ciphertext_array == nullptr)
