@@ -37,6 +37,7 @@ COPY /SEALPythonExamples /SEAL/SEALPythonExamples
 WORKDIR /SEAL/SEALPython
 RUN pip3 install --upgrade pip
 RUN pip3 install setuptools
+RUN pip3 install numpy
 RUN pip3 install -r requirements.txt
 RUN git clone https://github.com/pybind/pybind11.git
 WORKDIR /SEAL/SEALPython/pybind11
