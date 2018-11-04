@@ -184,6 +184,10 @@ PYBIND11_MODULE(seal, m) {
     .def("reserve", (void (Ciphertext::*)(const EncryptionParameters &, int, const MemoryPoolHandle &)) &Ciphertext::reserve,
         "Allocates enough memory to accommodate the backing array of a ciphertext with given capacity")
     .def("size", &Ciphertext::size, "Returns the capacity of the allocation")
+    .def("read_ciphertext_array", &Ciphertext::read_ciphertext_array,
+        "Returns the underlying ciphertext array", return_value_policy::copy)
+    .def("write_ciphertext_array", &Ciphertext::write_ciphertext_array, 
+        "Set the underlying ciphertext array with")
     .def(py::pickle(&serialize<Ciphertext>, &deserialize<Ciphertext>))
     .def("save", (void (Ciphertext::*)(std::string &)) &Ciphertext::python_save,
         "Saves Ciphertext object to file given filepath")

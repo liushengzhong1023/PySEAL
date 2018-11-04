@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include "seal/util/uintcore.h"
 #include "seal/encryptionparams.h"
 #include "seal/memorypoolhandle.h"
@@ -503,6 +504,22 @@ namespace seal
         inline const EncryptionParameters::hash_block_type &hash_block() const
         {
             return hash_block_;
+        }
+
+        std::vector<uint64_t> read_ciphertext_array() const {
+            auto ptr = ciphertext_array_.get();
+            auto size = size_ * poly_coeff_count_ * coeff_mod_count_;
+            std::vector<uint64_t> ret(ptr, ptr + size);
+            return ret;
+        }
+
+        void write_ciphertext_array(std::uint64_t *ciphertext_array) {
+            if (ciphertext_array == nullptr)
+            {
+                throw std::invalid_argument("ciphertext_array cannot be null");
+            }
+
+            ciphertext_array_ = util::Pointer::Aliasing(ciphertext_array);
         }
 
         /**
